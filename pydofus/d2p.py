@@ -89,14 +89,19 @@ class D2PReader:
 
         self._properties = OrderedDict()
 
+        # print("D2PReader props: " +  str(self._number_properties))
+        
         i = 0
         while i < self._number_properties:
-            property_type = (D2P_file_binary.read_string()).decode()
-            property_value = (D2P_file_binary.read_string()).decode()
+            try:
+                property_type = (D2P_file_binary.read_string()).decode()
+                property_value = (D2P_file_binary.read_string()).decode()
+            except ValueError:
+                property_type = (D2P_file_binary.read_string()).decode('latin-1')
+                property_value = (D2P_file_binary.read_string()).decode('latin-1')
             if property_type == b"" or property_value == b"":
                 raise InvalidD2PFile("The file appears to be corrupt.")
             self._properties[property_type] = property_value
-
             i += 1
 
         if autoload:
@@ -109,6 +114,8 @@ class D2PReader:
         if self._loaded:
             raise Exception("D2P instance is already populated.")
 
+        print("d2p.load")
+    
         D2P_file_binary = _BinaryStream(self._stream, True)
 
         self._files = OrderedDict()
