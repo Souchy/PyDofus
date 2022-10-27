@@ -68,7 +68,7 @@ class Map:
         self._obj["mapVersion"] = self.raw().read_char()
         self._obj["mapId"] = self.raw().read_uint32()
 
-        print("map header " + str(self._obj["header"]))
+        # print("map header " + str(self._obj["header"]))
         
         if self._obj["mapVersion"] >= 7:
             self._obj["encrypted"] = self.raw().read_bool()
@@ -93,7 +93,7 @@ class Map:
         self._obj["rightNeighbourId"] = self.raw().read_int32()
         self._obj["shadowBonusOnEntities"] = self.raw().read_uint32()
 
-        print("map shadowBonusOnEntities " + str(self._obj["shadowBonusOnEntities"]))
+        # print("map shadowBonusOnEntities " + str(self._obj["shadowBonusOnEntities"]))
         
         if self._obj["mapVersion"] >= 9:
             read_color = self.raw().read_int32()
@@ -114,7 +114,7 @@ class Map:
 
         self._obj["backgroundColor"] = (self._obj["backgroundRed"] & 255) << 16 | (self._obj["backgroundGreen"] & 255) << 8 | self._obj["backgroundBlue"] & 255
 
-        print("map backgroundColor " + str(self._obj["backgroundColor"]))
+        # print("map backgroundColor " + str(self._obj["backgroundColor"]))
         
         if self._obj["mapVersion"] >= 4:
             self._obj["zoomScale"] = self.raw().read_uint16() / 100
@@ -150,14 +150,14 @@ class Map:
             fg.read()
             self._obj["foregroundsFixtures"].append(fg.getObj())
             
-        print("map foregroundsCount " + str(self._obj["foregroundsCount"]))
+        # print("map foregroundsCount " + str(self._obj["foregroundsCount"]))
 
         self.raw().read_int32()
         self._obj["groundCRC"] = self.raw().read_int32()
         self._obj["layersCount"] = self.raw().read_char()
         
         # layers
-        print("map layersCount " + str(self._obj["layersCount"]))
+        # print("map layersCount " + str(self._obj["layersCount"]))
         self._obj["layers"] = []
         for i in range(0, self._obj["layersCount"]):
             # try:
@@ -166,7 +166,7 @@ class Map:
                 self._obj["layers"].append(la.getObj())
             # except:
             #     print("failed layer " + str(i))
-        print("map layers " + str(len(self._obj["layers"])))
+        # print("map layers " + str(len(self._obj["layers"])))
 
         # cells 
         self._obj["cellsCount"] = 560 # MAP_CELLS_COUNT
@@ -176,7 +176,7 @@ class Map:
             cd.read()
             self._obj["cells"].append(cd.getObj())
 
-        print("map cells " + str(len(self._obj["cells"])))
+        # print("map cells " + str(len(self._obj["cells"])))
         
     def write(self):
         output_stream = self._raw
@@ -337,7 +337,7 @@ class Layer:
         else:
             self._obj["layerId"] = self.raw().read_int32()
         self._obj["cellsCount"] = self.raw().read_int16()
-        print("layer cell count: " + str(self._obj["cellsCount"]))
+        # print("layer cell count: " + str(self._obj["cellsCount"]))
         self._obj["cells"] = []
         if self._obj["cellsCount"] > 0:
             for i in range(0, self._obj["cellsCount"]):
