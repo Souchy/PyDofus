@@ -7,7 +7,7 @@ from pydofus.d2i import D2I, InvalidD2IFile
 file = sys.argv[1]
 
 d2i_input = open(file, "rb")
-json_output = open(file.replace("d2i", "json"), "w", encoding="utf-8")
+json_output = open(file.replace(".d2i", ".json"), "w", encoding="utf-8")
 
 d2i = D2I(d2i_input)
 data = d2i.read()
