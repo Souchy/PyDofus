@@ -114,7 +114,7 @@ class D2PReader:
         if self._loaded:
             raise Exception("D2P instance is already populated.")
 
-        print("d2p.load")
+        # print("d2p.load")
     
         D2P_file_binary = _BinaryStream(self._stream, True)
 

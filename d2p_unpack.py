@@ -25,7 +25,7 @@ for subdir, dirs, files in os.walk(path_input):
                 d2p_reader = D2PReader(d2p_file, False)
                 d2p_reader.load()
                 for name, specs in d2p_reader.files.items():
-                    print("extract file " + file_name + "/" + name)
+                    # print("extract file " + file_name + "/" + name)
 
                     try:
                         os.stat(out_dir + file_name + "/" + os.path.dirname(name))

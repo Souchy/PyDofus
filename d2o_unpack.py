@@ -14,7 +14,7 @@ for subdir, dirs, files in os.walk(path_input):
             d2p_file = open(subdir + "/" + file, "rb")
             out_dir = (subdir + "/").replace(path_input, path_output)
 
-            print("D2O Unpacker for " + file_name)
+            # print("D2O Unpacker for " + file_name)
 
             try:
                 d2o_reader = D2OReader(d2p_file)
